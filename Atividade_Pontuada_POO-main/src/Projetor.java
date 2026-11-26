@@ -12,8 +12,8 @@ public class Projetor extends Equipamentos {
         return caboHdmi;
     }
 
-    public void setCaboHdmiDisponivel(boolean caboHdmi) {
-        this.caboHdmi = caboHdmi;
+    public void setCaboHdmi() {
+        caboHdmi = !caboHdmi;
     }
 
     @Override
