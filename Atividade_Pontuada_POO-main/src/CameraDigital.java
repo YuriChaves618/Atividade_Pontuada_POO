@@ -11,7 +11,9 @@ public class CameraDigital extends Equipamentos implements Carregamento{
     public CameraDigital(String codigoPatrimonio, String nome, String marca, String modelo,
                          double carga, boolean cartaMemoria) {
         super(codigoPatrimonio, nome, marca, modelo);
-        validarPercentual(carga);
+        if (carga < 0 || carga > 100) {
+            throw new IllegalArgumentException("O percentual de carga deve estar entre 0% e 100%!");
+        }
         this.carga = carga;
         this.cartaoMemoria = cartaMemoria;
     }
@@ -46,7 +48,9 @@ public class CameraDigital extends Equipamentos implements Carregamento{
 
     @Override
     public void atualizarCargaPorPercentual(double percentual) {
-        validarPercentual(percentual);
+        if (percentual < 0 || percentual > 100) {
+            throw new IllegalArgumentException("O percentual de carga deve estar entre 0% e 100%!");
+        }
         carga = percentual;
     }
 
@@ -79,10 +83,5 @@ public class CameraDigital extends Equipamentos implements Carregamento{
         }
     }
 
-    private void validarPercentual(double percentual) {
-        if (percentual < 0 || percentual > 100) {
-            throw new IllegalArgumentException("O percentual de carga deve estar entre 0% e 100%!");
-        }
-    }
 }
 
