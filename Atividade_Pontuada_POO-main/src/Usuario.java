@@ -3,26 +3,31 @@ import java.time.LocalDate;
 public  abstract class Usuario {
    private final String nome;
    private final int matricula;
-    private boolean ativo;
-    private LocalDate ultimaAtlualizacao;
-    private String dataUltimaAtualizacao;
+private boolean ativo;
+   private LocalDate dataUltimaAtualizacao;
     
-    public Usuario(String nome, int matricula,String dataUltimaAtualizacao) {
+    public Usuario(String nome, int matricula) {
+        if (nome == null || nome.equals("")) {
+            throw new IllegalArgumentException("O nome não pode ser nulo ou vazio.");
+        }
+        if (matricula <= 0) {
+            throw new IllegalArgumentException("A matrícula deve ser um número positivo.");
+        }
+       
         this.nome = nome;
         this.matricula = matricula;
         this.ativo = true;
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
+        this.dataUltimaAtualizacao = LocalDate.now();
     }   
+    
    public abstract int getLimiteEmprestimos();
 
-   public void alterarStatus(String dataUltimaAtualizacao){
-    if (this.ativo) {
-            this.ativo = false;
-        } else {
-            this.ativo = true;
-        }
-        this.dataUltimaAtualizacao = dataUltimaAtualizacao;
-   }
+   public void alterarStatus(){
+   ativo = !ativo;
+   dataUltimaAtualizacao = LocalDate.now();
+        
+    }
+   
    public String getNome() {
         return nome;
     }
@@ -47,7 +52,7 @@ public  abstract class Usuario {
         }
     }
 
-    public String getDataUltimaAtualizacao() {
+    public LocalDate getDataUltimaAtualizacao() {
         return dataUltimaAtualizacao;
     }
     public void exibirDados() {
