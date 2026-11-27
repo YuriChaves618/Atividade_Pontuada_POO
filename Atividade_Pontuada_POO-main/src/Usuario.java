@@ -56,10 +56,10 @@ private boolean ativo;
         return dataUltimaAtualizacao;
     }
     public void exibirDados() {
-    System.out.println("Nome: " + nome);
-    System.out.println("Matricula: " + matricula);
-    System.out.println("Situacao: " + getSituacao());
-    System.out.println("Ultima atualizacao: " + dataUltimaAtualizacao);
-    System.out.println("Limite de emprestimos: " + getLimiteEmprestimos());
+   System.out.println("Nome: " + getNome());
+        System.out.println("Matricula: " + getMatricula());
+        System.out.println("Situacao: " + getSituacao());
+        System.out.println("Ultima atualizacao: " + getDataUltimaAtualizacao());
+        System.out.println("Limite de emprestimos: " + getLimiteEmprestimos());
 }
 }
