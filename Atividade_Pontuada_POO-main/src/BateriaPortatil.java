@@ -1,6 +1,7 @@
 public class BateriaPortatil implements Carregamento{
     private final String codigo;
     private double cargaAtual;
+    private static final int taxa = 5;
 
     public BateriaPortatil(String codigo, double cargaAtual){
         if(codigo == null  || codigo.isBlank()){
@@ -28,7 +29,7 @@ public class BateriaPortatil implements Carregamento{
             return 0;
         }else{
             percentualFaltante = 100 - cargaAtual;
-            tempoCarregamento = (int)Math.ceil(percentualFaltante / 5) * 2;
+            tempoCarregamento = (int)Math.ceil(percentualFaltante / taxa) * 2;
             return tempoCarregamento;
         }
     }
@@ -43,7 +44,7 @@ public class BateriaPortatil implements Carregamento{
         else{
             for(int i = 1; i <= minutos; i++){
                 if(i % 2 == 0){
-                    carga += 5;
+                    carga += taxa;
                 }
             }
             resultadoCargaAtual = cargaAtual + carga;
