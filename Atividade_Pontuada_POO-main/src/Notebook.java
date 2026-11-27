@@ -8,14 +8,17 @@ public class Notebook extends Equipamentos implements Carregamento {
 
     public Notebook(String codigoPatrimonio, String nome, String marca, String modelo, double cargaInicial) {
         super(codigoPatrimonio, nome, marca, modelo);
-        validarPercentual(cargaInicial);
+        if (cargaInicial < 0 || cargaInicial > 100) {
+            throw new IllegalArgumentException("O percentual de carga deve estar entre 0% e 100%!");
+        }
         carga = cargaInicial;
     }
 
+    @Override
     public double consultarCarga() {
         return carga;
     }
-
+    @Override
     public void atualizarCargaPorTempo(int minutos) {
         if (minutos <= 0) {
             throw new IllegalArgumentException("O tempo de carregamento deve ser positivo!");
@@ -29,26 +32,24 @@ public class Notebook extends Equipamentos implements Carregamento {
             }
         }
     }
-
+    @Override
     public void atualizarCargaPorPercentual(double percentual) {
-        validarPercentual(percentual);
+        if (percentual < 0 || percentual > 100) {
+            throw new IllegalArgumentException("O percentual de carga deve estar entre 0% e 100%!");
+        }
         carga = percentual;
     }
-
+     @Override
     public int calcularTempoMinimoCarregamento() {
-        double falta = 100 - carga;
+     double falta = 100 - carga;
         if (falta <= 0) {
             return 0;
         } else {
-            int intervalos = (int) (falta / taxa);
-            if (intervalos * taxa < falta) {
-                return (intervalos + 1) * 2;
-            } else {
-                return intervalos * 2;
-            }
+            int intervalos = (int) Math.ceil(falta / taxa);
+            return intervalos * 2;
         }
     }
-
+    @Override
     public boolean verificarCondicoesEmprestimoManutencao() {
         if (carga >= cargaMinima) {
             return true;
@@ -56,9 +57,10 @@ public class Notebook extends Equipamentos implements Carregamento {
             return false;
         }
     }
-
+    @Override
     public int consultarPrazoEmprestimo() {
         return prazoEmprestimo;
+
     }
 
     public static void alterarPrazoEmprestimo(int novoPrazo) {
@@ -68,10 +70,6 @@ public class Notebook extends Equipamentos implements Carregamento {
             prazoEmprestimo = novoPrazo;
         }
     }
-
-    private void validarPercentual(double percentual) {
-        if (percentual < 0 || percentual > 100) {
-            throw new IllegalArgumentException("O percentual de carga deve estar entre 0% e 100%!");
-        }
-    }
+   
+    
 }
