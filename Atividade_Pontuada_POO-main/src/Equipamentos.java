@@ -43,11 +43,55 @@ public abstract class Equipamentos {
 
     public abstract int consultarPrazoEmprestimo();
 
+    public void retirarPorEmprestimo() {
+
+        if (!situacao.equals("Disponível")) {
+            throw new IllegalStateException(
+                    "O equipamento não está disponível!");
+        }
+
+        if (!verificarCondicoesEmprestimoManutencao()) {
+            throw new IllegalStateException(
+                    "O equipamento não atende às condições para empréstimo!");
+        }
+
+        situacao = "Emprestado";
+    }
+
     public void iniciarManutencao() {
+      if (situacao.equals("Emprestado")) {
+            throw new IllegalStateException(
+                    "O equipamento está emprestado!");
+        }
+
+        if (situacao.equals("Em manutenção")) {
+            throw new IllegalStateException(
+                    "O equipamento já está em manutenção!");
+        }
+
         situacao = "Em manutenção";
     }
 
+ public void registrarDevolucao(boolean necessitaReparo) {
+
+        if (!situacao.equals("Emprestado")) {
+            throw new IllegalStateException(
+                    "O equipamento não possui empréstimo em aberto!");
+        }
+
+        if (necessitaReparo) {
+            situacao = "Em manutenção";
+        } else {
+            situacao = "Disponível";
+        }
+    }
+
     public void encerrarManutencao() {
+     if (!situacao.equals("Em manutenção")) {
+            throw new IllegalStateException(
+                    "O equipamento não está em manutenção!");
+        }
+
         situacao = "Disponível";
     }
 
