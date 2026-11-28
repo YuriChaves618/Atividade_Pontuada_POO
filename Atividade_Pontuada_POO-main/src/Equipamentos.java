@@ -57,7 +57,7 @@ public abstract class Equipamentos {
     }
 
     public void iniciarManutencao() {
-      if (situacao.equals("Emprestado")) {
+        if (situacao.equals("Emprestado")) {
             throw new IllegalStateException("O equipamento está emprestado!");
         }
 
@@ -68,7 +68,7 @@ public abstract class Equipamentos {
         situacao = "Em manutenção";
     }
 
- public void registrarDevolucao(boolean necessitaReparo) {
+    public void registrarDevolucao(boolean necessitaReparo) {
 
         if (!situacao.equals("Emprestado")) {
             throw new IllegalStateException( "O equipamento não possui empréstimo em aberto!");
@@ -82,7 +82,7 @@ public abstract class Equipamentos {
     }
 
     public void encerrarManutencao() {
-     if (!situacao.equals("Em manutenção")) {
+        if (!situacao.equals("Em manutenção")) {
             throw new IllegalStateException("O equipamento não está em manutenção!");
         }
 
