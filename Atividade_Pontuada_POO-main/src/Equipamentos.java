@@ -46,13 +46,11 @@ public abstract class Equipamentos {
     public void retirarPorEmprestimo() {
 
         if (!situacao.equals("Disponível")) {
-            throw new IllegalStateException(
-                    "O equipamento não está disponível!");
+            throw new IllegalStateException("O equipamento não está disponível!");
         }
 
         if (!verificarCondicoesEmprestimoManutencao()) {
-            throw new IllegalStateException(
-                    "O equipamento não atende às condições para empréstimo!");
+            throw new IllegalStateException("O equipamento não atende às condições para empréstimo!");
         }
 
         situacao = "Emprestado";
@@ -60,13 +58,11 @@ public abstract class Equipamentos {
 
     public void iniciarManutencao() {
       if (situacao.equals("Emprestado")) {
-            throw new IllegalStateException(
-                    "O equipamento está emprestado!");
+            throw new IllegalStateException("O equipamento está emprestado!");
         }
 
         if (situacao.equals("Em manutenção")) {
-            throw new IllegalStateException(
-                    "O equipamento já está em manutenção!");
+            throw new IllegalStateException("O equipamento já está em manutenção!");
         }
 
         situacao = "Em manutenção";
@@ -75,8 +71,7 @@ public abstract class Equipamentos {
  public void registrarDevolucao(boolean necessitaReparo) {
 
         if (!situacao.equals("Emprestado")) {
-            throw new IllegalStateException(
-                    "O equipamento não possui empréstimo em aberto!");
+            throw new IllegalStateException( "O equipamento não possui empréstimo em aberto!");
         }
 
         if (necessitaReparo) {
@@ -88,8 +83,7 @@ public abstract class Equipamentos {
 
     public void encerrarManutencao() {
      if (!situacao.equals("Em manutenção")) {
-            throw new IllegalStateException(
-                    "O equipamento não está em manutenção!");
+            throw new IllegalStateException("O equipamento não está em manutenção!");
         }
 
         situacao = "Disponível";
