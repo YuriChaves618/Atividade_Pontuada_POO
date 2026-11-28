@@ -202,7 +202,7 @@ public class CentroDeRecursos {
         }
         throw new IllegalArgumentException("Não há empréstimo em aberto para essa matrícula e equipamento!");
     }
-    
+
 
     private int contarEmprestimosEmAberto(Usuario usuario) {
         int total = 0;
